@@ -1,6 +1,7 @@
 #include <stdio.h>
 
-typedef struct{
+typedef struct
+{
   short unsigned int free_count;
   short unsigned int free_mask;
   unsigned int signature;

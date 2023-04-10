@@ -1,7 +1,8 @@
 #include "slab.h"
 
 
-unsigned char *slab_allocate(){
+unsigned char *slab_allocate()
+{
   unsigned int slab_index, obj_index;
   unsigned char *addr;
 
@@ -12,7 +13,8 @@ unsigned char *slab_allocate(){
   return(addr);
 }
 
-int slab_release( unsigned char *addr ){
+int slab_release(unsigned char *addr)
+{
   unsigned int sanity_check = ((int)(addr - start))>>16;  /* should be 0 */
   unsigned int slab_index = ((int)(addr - start))>>12;
   unsigned int obj_index = (((int)(addr - start))>>8)&15;
