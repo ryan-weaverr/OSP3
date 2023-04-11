@@ -10,7 +10,8 @@ unsigned char *slab_allocate()
   // fill in
 
   // Find the first available slab with empty slots
-    slab_index = __builtin_ffs(~full_mask) - 1;
+    slab_index = partial_mask ? (__builtin_ffs(partial_mask) - 1) : (__builtin_ffs(empty_mask) - 1);
+
     if (slab_index == -1) return NULL; // No available slabs
 
     // Find the first free object within the slab
@@ -22,12 +23,15 @@ unsigned char *slab_allocate()
 
     // Update the slab's status (partial or full)
     if (s[slab_index].free_count == 0) {
+        partial_mask ^= (short)(1 << (15 - slab_index));
         full_mask |= (short)(1 << (15 - slab_index));
+    } else if (s[slab_index].free_count == 14) {
+        empty_mask ^= (short)(1 << (15 - slab_index));
+        partial_mask |= (short)(1 << (15 - slab_index));
     }
 
     // Calculate the address of the allocated object
-    addr = start + (slab_index << 12) + (obj_index << 8);
-
+    addr = start + (slab_index << 12) + ((obj_index + 1) << 8);
 
 
   // end
