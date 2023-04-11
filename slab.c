@@ -23,32 +23,29 @@ unsigned char *slab_allocate()
 
   // fill in
 
-  if (!partial_mask) {
-        if (!empty_mask) {
-            printf("Out of memory\n");
-            return (0);
-        }
+  // Find the first available slab with empty slots
+    slab_index = partial_mask ? (__builtin_ffs(partial_mask) - 1) : (__builtin_ffs(empty_mask) - 1);
 
-        slab_index = least_significant_set_bit_position(empty_mask) - 1;
-        empty_mask = empty_mask ^ (short)(1 << (15 - slab_index));
-        partial_mask = partial_mask | (short)(1 << (15 - slab_index));
-        s[slab_index].free_count = 15;
-        s[slab_index].free_mask = 0x7fff;
-    } else {
-        slab_index = least_significant_set_bit_position(partial_mask) - 1;
-    }
+    if (slab_index == -1) return NULL; // No available slabs
 
-    obj_index = least_significant_set_bit_position(s[slab_index].free_mask) - 1;
+    // Find the first free object within the slab
+    obj_index = __builtin_ffs(s[slab_index].free_mask) - 1;
 
-    s[slab_index].free_mask = s[slab_index].free_mask ^ (short)(1 << (15 - obj_index));
+    // Update the slab's free mask and free count
+    s[slab_index].free_mask &= ~(1 << obj_index);
     s[slab_index].free_count--;
 
-    if (!s[slab_index].free_count) {
-        partial_mask = partial_mask ^ (short)(1 << (15 - slab_index));
-        full_mask = full_mask | (short)(1 << (15 - slab_index));
+    // Update the slab's status (partial or full)
+    if (s[slab_index].free_count == 0) {
+        partial_mask ^= (1 << slab_index);
+        full_mask |= (1 << slab_index);
+    } else if (s[slab_index].free_count == 14) {
+        empty_mask ^= (1 << slab_index);
+        partial_mask |= (1 << slab_index);
     }
 
-    addr = start + (slab_index << 12) + (obj_index << 8);
+    // Calculate the address of the allocated object
+    addr = start + (slab_index << 12) + ((obj_index + 1) << 8);
 
   // end
 
