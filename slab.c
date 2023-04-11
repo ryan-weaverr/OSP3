@@ -1,6 +1,5 @@
 #include "slab.h"
 
-
 unsigned char *slab_allocate()
 {
   unsigned int slab_index, obj_index;
@@ -17,6 +16,7 @@ unsigned char *slab_allocate()
         slab_index = __builtin_ffs(empty_mask) - 1;
         if (slab_index == -1) return NULL; // No available slabs
         empty_mask ^= (short)(1 << (15 - slab_index));
+        partial_mask |= (short)(1 << (15 - slab_index));
     }
 
     // Find the first free object within the slab
@@ -30,13 +30,10 @@ unsigned char *slab_allocate()
     if (s[slab_index].free_count == 0) {
         partial_mask ^= (short)(1 << (15 - slab_index));
         full_mask |= (short)(1 << (15 - slab_index));
-    } else {
-        partial_mask |= (short)(1 << (15 - slab_index));
     }
 
     // Calculate the address of the allocated object
-    addr = start + (slab_index << 12) + (obj_index << 8);
-
+    addr = (unsigned char *)(&s[slab_index].free_space) + (obj_index * 256);
 
 
 
