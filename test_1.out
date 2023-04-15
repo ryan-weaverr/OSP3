@@ -1,0 +1,20 @@
+empty/partial/full = ffff 0000 0000
+empty/partial/full = 0000 0000 ffff
+empty/partial/full = ffff 0000 0000
+empty/partial/full = 0000 fffb 0004
+slab 0 has free count of 1 and free mask of 1000
+slab 1 has free count of 1 and free mask of 0800
+slab 2 has free count of 1 and free mask of 0400
+slab 3 has free count of 1 and free mask of 0200
+slab 4 has free count of 1 and free mask of 0100
+slab 5 has free count of 1 and free mask of 0080
+slab 6 has free count of 1 and free mask of 0040
+slab 7 has free count of 1 and free mask of 0020
+slab 8 has free count of 1 and free mask of 0010
+slab 9 has free count of 1 and free mask of 0008
+slab 10 has free count of 1 and free mask of 0004
+slab 11 has free count of 1 and free mask of 0002
+slab 12 has free count of 1 and free mask of 0001
+slab 13 has free count of 0 and free mask of 0000
+slab 14 has free count of 1 and free mask of 4000
+slab 15 has free count of 1 and free mask of 2000

@@ -1,0 +1,12 @@
+start addr is 0x630000
+empty/partial/full = ffff 0000 0000
+empty/partial/full = 0fff 0000 f000
+slab 0 has free count of 0 and free mask of 0000
+slab 1 has free count of 0 and free mask of 0000
+slab 2 has free count of 0 and free mask of 0000
+slab 3 has free count of 0 and free mask of 0000
+empty/partial/full = 0fff/f000/0000
+slab 0 has free count of 8 and free mask of 5555
+slab 1 has free count of 7 and free mask of 2aaa
+slab 2 has free count of 2 and free mask of 4001
+slab 3 has free count of 2 and free mask of 4001

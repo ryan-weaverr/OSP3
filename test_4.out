@@ -1,0 +1,13 @@
+allocation 241 returned a NULL pointer
+allocation 242 returned a NULL pointer
+empty/partial/full = 0000 0000 ffff
+return code is 0, expecting 0
+slab 15 has free count of 1 and free mask of 0002
+return code is 2, expecting 2
+return code is 1, expecting 1
+return code is 1, expecting 1
+return code is 1, expecting 1
+empty/partial/full = ffff/0000/0000
+empty/partial/full = ffff/0000/0000
+return code is 1, expecting 1
+empty/partial/full = 7fff/8000/0000

@@ -1,0 +1,32 @@
+start addr is 0x630000
+empty/partial/full = ffff 0000 0000
+allocated addr is 0x630100
+slab 0 has free count of 14 and free mask of 3fff
+0x630000: 0x0e
+0x630001: 0x00
+0x630002: 0xff
+0x630003: 0x3f
+0x630004: 0xab
+0x630005: 0x51
+0x630006: 0xab
+0x630007: 0x51
+empty/partial/full = 7fff 8000 0000
+allocated addr is 0x630200
+allocated addr is 0x630300
+ ...
+allocated addr is 0x630e00
+empty/partial/full = 7fff/8000/0000
+allocated addr is 0x630f00
+empty/partial/full = 7fff/0000/8000
+allocated addr is 0x631100
+empty/partial/full = 3fff/4000/8000
+inspected addr is 0x630600
+slab 0 has free count of 0 and free mask of 0000
+released addr is  0x630600
+inspected addr is 0x630700
+slab 0 has free count of 1 and free mask of 0200
+empty/partial/full = 3fff/c000/0000
+allocated addr is 0x630600
+inspected addr is 0x630600
+slab 0 has free count of 0 and free mask of 0000
+empty/partial/full = 3fff/4000/8000
